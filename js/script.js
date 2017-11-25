@@ -19,10 +19,8 @@ var computer = {
 	score: 0
 };
 
-//wywolanie funkcji
 setGameElements();
 
-//zdarzenia, nawolywacze
 newGameBtn.addEventListener('click', newGame, false);
 
 pickRock.addEventListener('click', function () {
@@ -39,19 +37,6 @@ function playerPick(playerPick) {
 	console.log(playerPick);
 }
 
-function newGame() {
-	player.name = prompt('Please enter your name', 'imie gracza');
-	if(player.name){
-		player.score = 0;
-		computer.score = 0;
-		gameState = 'started';
-		setGameElements();
-		
-		playerNameElem.innerHTML = player.name;
-		
-	}
-}
-
 function setGameElements() {
 	switch (gameState) {
 		case 'started':
@@ -60,11 +45,22 @@ function setGameElements() {
 			resultElem.style.display = 'block';
 			break;
 		case 'ended':
-			newGameBtn.innerHTML = 'Jeszcze raz';
+			newGameBtn.innerHTML = 'Play again';
 		case 'notStarted':
 		default:
 			newGameElement.style.display = 'block';
 			pickElement.style.display = 'none';
 			resultElem.style.display = 'none';
+	}
+}
+
+function newGame() {
+	player.name = prompt('Please enter your name', 'Name player');
+	if (player.name) {
+		player.score = 0;
+		computer.score = 0;
+		gameState = 'started';
+		
+		setGameElements();
 	}
 }
