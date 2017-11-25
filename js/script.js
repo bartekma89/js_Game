@@ -9,6 +9,10 @@ var resultElem = document.getElementById('js-resultsTableElement');
 var playerPointsElem = document.getElementById('js-playerPoints');
 var playerNameElem = document.getElementById('js-playerName');
 var computerPointsElem = document.getElementById('js-copmuterPoints');
+var playerPickElem = document.getElementById('js-playerPick');
+var computerPickElem = document.getElementById('js-computerPick');
+var playerResult = document.getElementById('js-playerResult');
+var computerResult = document.getElementById('js-computerResult');
 
 var gameState = 'notStarted';
 var player = {
@@ -34,7 +38,10 @@ pickScissors.addEventListener('click', function () {
 }, false);
 
 function playerPick(playerPick) {
-	console.log(playerPick);
+	var computerPick = getComputerPick();
+	
+	playerPickElem.innerHTML = playerPick;
+	computerPickElem.innerHTML = computerPick;
 }
 
 function setGameElements() {
@@ -55,12 +62,19 @@ function setGameElements() {
 }
 
 function newGame() {
-	player.name = prompt('Please enter your name', 'Name player');
+	player.name = prompt('Please enter your name', 'Player name');
 	if (player.name) {
 		player.score = 0;
 		computer.score = 0;
 		gameState = 'started';
+		playerNameElem.innerHTML = player.name;
 		
 		setGameElements();
 	}
 }
+
+function getComputerPick() {
+	var possiblePicks = ['rock', 'paper', 'scissors'];
+	return possiblePicks[Math.floor(Math.random() * 3)];
+}
+
