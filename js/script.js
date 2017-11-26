@@ -51,16 +51,13 @@ function playerPick(playerPick) {
 }
 
 function setGameElements() {
-	debugger
+
 	switch (gameState) {
 		case 'started':
 			newGameElement.style.display = 'none';
 			pickElement.style.display = 'block';
 			resultElem.style.display = 'block';
 			resetElement();
-			pickPaper.onmousemove = null;
-			pickRock.onmousedown = null;
-			pickScissors.onmousemove = null;
 			break;
 		case 'ended':
 			newGameBtn.innerHTML = 'Play again';
@@ -125,18 +122,15 @@ function setGamePoints() {
 }
 
 function checkResult() {
-	debugger
-	if (player.score == 3) {
+	if (player.score == 10) {
 		gameState = 'ended';
 		vsElem.innerHTML = player.name + " Win!";
-		disabledPickElem();
-		setTimeout(setGameElements, 3000);
+		setGameElements();
 
-	} else if (computer.score == 3) {
+	} else if (computer.score == 10) {
 		gameState = 'ended';
 		vsElem.innerHTML = "Computer Win!";
-		disabledPickElem();
-		setTimeout(setGameElements, 3000);
+		setGameElements();
 	}
 }
 
@@ -146,16 +140,4 @@ function resetElement() {
 	playerPickElem.innerHTML = '';
 	computerPickElem.innerHTML = '';
 	vsElem.innerHTML = 'VS.';
-}
-
-function disabledPickElem() {
-	pickPaper.addEventListener('mousemove', function (e) {
-		e.target.setAttribute('disabled', true);
-	});
-	pickRock.addEventListener('mousemove', function (e) {
-		e.target.setAttribute('disabled', true);
-	});
-	pickScissors.addEventListener('mousemove', function (e) {
-		e.target.setAttribute('disabled', true);
-	});
 }
