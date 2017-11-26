@@ -13,6 +13,7 @@ var playerPickElem = document.getElementById('js-playerPick');
 var computerPickElem = document.getElementById('js-computerPick');
 var playerResult = document.getElementById('js-playerResult');
 var computerResult = document.getElementById('js-computerResult');
+var vsElem = document.getElementById('js-vs');
 
 var gameState = 'notStarted';
 var player = {
@@ -50,12 +51,16 @@ function playerPick(playerPick) {
 }
 
 function setGameElements() {
-
+	debugger
 	switch (gameState) {
 		case 'started':
 			newGameElement.style.display = 'none';
 			pickElement.style.display = 'block';
 			resultElem.style.display = 'block';
+			resetElement();
+			pickPaper.onmousemove = null;
+			pickRock.onmousedown = null;
+			pickScissors.onmousemove = null;
 			break;
 		case 'ended':
 			newGameBtn.innerHTML = 'Play again';
@@ -120,14 +125,37 @@ function setGamePoints() {
 }
 
 function checkResult() {
-
+	debugger
 	if (player.score == 3) {
 		gameState = 'ended';
-		setGameElements();
+		vsElem.innerHTML = player.name + " Win!";
+		disabledPickElem();
+		setTimeout(setGameElements, 3000);
 
 	} else if (computer.score == 3) {
 		gameState = 'ended';
-		setGameElements();
+		vsElem.innerHTML = "Computer Win!";
+		disabledPickElem();
+		setTimeout(setGameElements, 3000);
 	}
 }
 
+function resetElement() {
+	playerResult.innerHTML = '';
+	computerResult.innerHTML = '';
+	playerPickElem.innerHTML = '';
+	computerPickElem.innerHTML = '';
+	vsElem.innerHTML = 'VS.';
+}
+
+function disabledPickElem() {
+	pickPaper.addEventListener('mousemove', function (e) {
+		e.target.setAttribute('disabled', true);
+	});
+	pickRock.addEventListener('mousemove', function (e) {
+		e.target.setAttribute('disabled', true);
+	});
+	pickScissors.addEventListener('mousemove', function (e) {
+		e.target.setAttribute('disabled', true);
+	});
+}
