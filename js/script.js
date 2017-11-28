@@ -61,6 +61,10 @@ function setGameElements() {
 			break;
 		case 'ended':
 			newGameBtn.innerHTML = 'Play again';
+			newGameElement.style.display = 'block';
+			resultElem.style.display = 'block';
+			pickElement.style.display = 'none';
+			break;
 		case 'notStarted':
 		default:
 			newGameElement.style.display = 'block';
@@ -122,12 +126,12 @@ function setGamePoints() {
 }
 
 function checkResult() {
-	if (player.score == 10) {
+	if (player.score == 3) {
 		gameState = 'ended';
 		vsElem.innerHTML = player.name + " Win!";
 		setGameElements();
 
-	} else if (computer.score == 10) {
+	} else if (computer.score == 3) {
 		gameState = 'ended';
 		vsElem.innerHTML = "Computer Win!";
 		setGameElements();
