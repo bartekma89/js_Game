@@ -126,12 +126,12 @@ function setGamePoints() {
 }
 
 function checkResult() {
-	if (player.score == 3) {
+	if (player.score == 10) {
 		gameState = 'ended';
 		vsElem.innerHTML = player.name + " Win!";
 		setGameElements();
 
-	} else if (computer.score == 3) {
+	} else if (computer.score == 10) {
 		gameState = 'ended';
 		vsElem.innerHTML = "Computer Win!";
 		setGameElements();
